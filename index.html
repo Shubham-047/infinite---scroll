@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+            color: blue;
+            
+        }
+        #main{
+            width: 400px;
+            margin:20px auto;
+            border: 10px solid red;
+            text-align: center;
+            border-radius: 10px;
+           
+        }
+        .list{
+            background-color: white;
+            border-bottom: 2px solid black;
+             font-size: larger;
+            font-weight: 500;
+            padding: 30px;
+             border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Infinite Scroll</h1>
+    <div id="main">
+
+    </div>
+</body>
+</html>
+<script>
+   
+ var container = document.getElementById("main")
+let limit = 25;
+let pageCount = 1;
+let count = 1;
+
+function getList() {
+    
+    for (var i = 0; i <= limit; i++){
+        var div = document.createElement("div")
+        div.setAttribute("class", "list")
+        div.innerHTML = `Masai Student ${i}`
+        container.appendChild(div)
+    }
+}
+getList();
+
+
+const showList = () =>{
+    setTimeout(() =>{
+        pageCount++;
+        getList();
+    },300)
+}
+window.addEventListener("scroll", () => {
+    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+        console.log("Hi a m at bottom")
+        showList();
+    }
+    console.log(scrollHeight, scrollTop, clientHeight)
+   
+});
+</script>
